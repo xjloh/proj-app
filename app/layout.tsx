@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "YC Directory",
-  description: "pitch and grow",
+  description: "Pitch, Vote and Grow",
 };
 
 export default function RootLayout({
