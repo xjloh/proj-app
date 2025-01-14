@@ -57,6 +57,8 @@ const StartupForm = () => {
                     ...prevState, error: "Validation failed", status: "ERROR", fields: {
                         title: formData.get("title"),
                         description: formData.get("description"),
+                        category: formData.get('category'),
+                        link: formData.get('link'),
                 } };
             }
 
@@ -76,6 +78,8 @@ const StartupForm = () => {
         fields: {
             title: '',
             description: '',
+            category: '',
+            link: '',
         }
     });
 
@@ -116,7 +120,8 @@ const StartupForm = () => {
                 name="category"
                 className="startup-form_input"
                 required
-                placeholder="Startup Category (Tech, Health, Education...)"
+                    placeholder="Startup Category (Tech, Health, Education...)"
+                    defaultValue={state.fields.category}
                 />
 
                 {errors.category && (
@@ -131,7 +136,8 @@ const StartupForm = () => {
                 name="link"
                 className="startup-form_input"
                 required
-                placeholder="Startup Image URL"
+                    placeholder="Startup Image URL"
+                    defaultValue={state.fields.link}
                 />
 
                 {errors.link && <p className="startup-form_error">{errors.link}</p>}
