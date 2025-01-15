@@ -1,9 +1,9 @@
-import { auth, signOut, signIn } from "@/auth.ts"
 import { BadgePlus, LogOut } from "lucide-react";
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { auth, signIn, signOut } from "@/auth";
 
 const Navbar = async () => {
     const session = await auth();
