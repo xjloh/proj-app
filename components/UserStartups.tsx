@@ -4,7 +4,7 @@ import React from 'react'
 import StartupCard, { StartupTypeCard } from './StartupCard';
 
 const UserStartups = async ({id} : {id : string}) => {
-    const startups = await client.fetch(STARTUPS_BY_AUTHOR_QUERY, { id });
+    const startups = await client.withConfig({ useCdn: false }).fetch(STARTUPS_BY_AUTHOR_QUERY, { id });
     
     return (
         <>

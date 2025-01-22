@@ -9,7 +9,6 @@ import { writeClient } from "@/sanity/lib/write-client";
 export const createPitch = async (state: any, form: FormData, pitch: string) => {
     const session = await auth();
 
-
     if (!session)
         return parseServerActionResponse({
             error: "Not signed in",
@@ -46,6 +45,35 @@ export const createPitch = async (state: any, form: FormData, pitch: string) => 
             error: "",
             status: "SUCCESS",
         });
+    } catch (error) {
+        console.log(error);
+
+        return parseServerActionResponse({
+            error: JSON.stringify(error),
+            status: "ERROR",
+        });
+    }
+}
+
+export const deletePitch = async (id: string) => {
+    const session = await auth();
+
+    if (!session) {
+        return parseServerActionResponse({
+            error: "Not signed in",
+            status: "ERROR",
+        });
+    }
+
+    try {
+        const result = await writeClient.delete(id);
+
+        return parseServerActionResponse({
+            ...result,
+            error: "",
+            status: "SUCCESS",
+        });
+
     } catch (error) {
         console.log(error);
 
