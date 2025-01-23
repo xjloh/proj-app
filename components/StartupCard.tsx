@@ -29,7 +29,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
     const path = usePathname();
     const pending = false;
 
-    const handleStartupCardDelete = async (id: string) => {
+    const handleDelete = async (id: string) => {
         try {
             const result = await deletePitch(id);
 
@@ -64,7 +64,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
                     </div>
                     {path.toString().match('user') ?
                         (
-                            <button className='ghost' disabled={pending} onClick={() => {handleStartupCardDelete(_id)}}>
+                            <button className='ghost' disabled={pending} onClick={() => {handleDelete(_id)}}>
                                 {
                                     pending ? "Deleting" : (<Trash></Trash>)
                                 }
