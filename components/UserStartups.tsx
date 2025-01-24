@@ -1,15 +1,27 @@
+'use client';
+
 import { client } from '@/sanity/lib/client'
 import { STARTUPS_BY_AUTHOR_QUERY } from '@/sanity/lib/queries'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import StartupCard, { StartupTypeCard } from './StartupCard';
 
-const UserStartups = async ({id} : {id : string}) => {
-    const startups = await client.fetch(STARTUPS_BY_AUTHOR_QUERY, { id });
+const UserStartups = ({ id }: { id: string }) => {
+    const [userStartups, setUserStartups] = useState([]);
+
+    useEffect(() => {
+        const fetchStartups = async () => {
+            const startups = await client.withConfig({ useCdn: false }).fetch(STARTUPS_BY_AUTHOR_QUERY, { id });
+            setUserStartups(startups);
+        }
+
+        fetchStartups();
+    });
+
     
     return (
         <>
-            {startups.length > 0 ? (startups.map((startup: StartupTypeCard) => (
-                <StartupCard key={startup._id} post={startup} />
+            {userStartups.length > 0 ? (userStartups.map((startup: StartupTypeCard) => (
+                <StartupCard key={startup._id} post={startup}/>
             ))
             ) : (
                 <p className="no-result">No posts yet</p>
