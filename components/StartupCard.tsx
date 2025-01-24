@@ -4,13 +4,14 @@ import { cn, formatDate } from '@/lib/utils'
 import { EyeIcon, Trash } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from './ui/button'
 import { Author, Startup } from '@/sanity/types'
 import { Skeleton } from './ui/skeleton'
 import { usePathname } from 'next/navigation';
 import { deletePitch } from '@/lib/actions';
 import { toast } from '@/hooks/use-toast';
+import { Spinner } from './ui/spinner';
 
 export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
 
@@ -26,10 +27,12 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         description,
     } = post;
 
+    const [deleting, setDeleting] = useState(false);
+
     const path = usePathname();
-    const pending = false;
 
     const handleDelete = async (id: string) => {
+        setDeleting(true);
         try {
             const result = await deletePitch(id);
 
@@ -48,6 +51,8 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
                 description: "Cannot delete startup card, please try again",
                 variant: "destructive",
             });
+        } finally {
+            setDeleting(false);
         }
     }
 
@@ -64,9 +69,9 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
                     </div>
                     {path.toString().match('user') ?
                         (
-                            <button className='ghost' disabled={pending} onClick={() => {handleDelete(_id)}}>
+                            <button className='ghost' disabled={deleting} onClick={() => {handleDelete(_id)}}>
                                 {
-                                    pending ? "Deleting" : (<Trash></Trash>)
+                                    deleting ? (<Spinner></Spinner>) : (<Trash></Trash>)
                                 }
                             </button>
                         )
