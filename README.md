@@ -23,14 +23,13 @@ A Next.js 15 platform where entrepreneurs can submit their startup ideas for vir
 
 ✨ Pitch Details Page: Click on any pitch to view its details, with multimedia and description displayed.
 
-✨ Profile Page: Users can view the list of pitches they've submitted.
+✨ Profile Page: Users can view and delete the pitches they've submitted.
 
 ✨ Views Counter: Tracks the number of views for each pitch instead of an upvote system.
 
 ✨ Search: Search functionality to load and view pitches efficiently.
 
 ✨ Minimalistic Design: Fresh and simple UI with only the essential pages for ease of use and a clean aesthetic.
-
 
 ## ⏩ Quick Start
 
